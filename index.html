@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joel Christner - CTO, Architect, Open Source Developer</title>
+    <meta name="description" content="Joel Christner - Chief Technology Officer, architect, and open source developer specializing in distributed systems, AI, and data management.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a68;
+            --text-muted: #6c6c8a;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f0f1a;
+            --bg-secondary: #1a1a2e;
+            --bg-card: #1e1e32;
+            --text-primary: #f0f0f5;
+            --text-secondary: #b8b8d0;
+            --text-muted: #8888a8;
+            --accent: #60a5fa;
+            --accent-hover: #93c5fd;
+            --border: #2d2d4a;
+            --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4), 0 4px 6px -2px rgba(0,0,0,0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header & Theme Toggle */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .theme-toggle svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--border);
+            margin-bottom: 1.5rem;
+            background-color: var(--bg-secondary);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .tagline {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .bio {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .social-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Sections */
+        section {
+            padding: 3rem 0;
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Project Cards - Two Columns */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease;
+        }
+
+        .project-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .project-card h3 a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .project-card h3 a:hover {
+            color: var(--accent);
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .project-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .project-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        /* Industry Leadership */
+        .industry-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .industry-item {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 1rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .industry-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .industry-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .industry-content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .industry-content p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Publications & Patents */
+        .publications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .publication-item {
+            padding: 1rem 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .publication-item h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .publication-item .meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .patents-summary {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .patents-summary h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .patents-summary p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .patents-summary a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .patents-summary a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 7rem 0 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .industry-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .social-links {
+                gap: 0.5rem;
+            }
+
+            .social-link {
+                padding: 0.4rem 0.75rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Joel Christner</a>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg class="moon-icon" style="display:none;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                    <span class="theme-label">Light</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <img src="profile.png" alt="Joel Christner" class="profile-photo">
+                <h1>Joel Christner</h1>
+                <p class="tagline">Chief Technology Officer, Architect, Open Source Developer</p>
+                <p class="bio">I build infrastructure software and developer tools, with deep expertise in distributed systems, messaging and networking, artificial intelligence, data storage and retrieval, and cloud-native architectures. MS Computer Science from Columbia University. .NET Foundation member with 13M+ package downloads. BJJ black belt. Based in California.</p>
+                <div class="social-links">
+                    <a href="https://github.com/jchristn" class="social-link" target="_blank" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                    <a href="https://nuget.org/profiles/jchristn" class="social-link" target="_blank" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L1.75 6v12L12 24l10.25-6V6L12 0zm-1.775 18a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4.5-6a2.25 2.25 0 1 1 0-4.5 2.25 2.25 0 0 1 0 4.5zM8.5 10.5a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                        NuGet
+                    </a>
+                    <a href="https://www.linkedin.com/in/joelchristner/" class="social-link" target="_blank" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=Yg_E8dcAAAAJ&hl=en" class="social-link" target="_blank" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+                        Scholar
+                    </a>
+                    <a href="mailto:joel.christner@gmail.com" class="social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        Email
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="open-source">
+            <div class="container">
+                <h2>Open Source</h2>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">13M+</div>
+                        <div class="stat-label">NuGet Downloads</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">176</div>
+                        <div class="stat-label">Packages</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">120+</div>
+                        <div class="stat-label">Repositories</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2K+</div>
+                        <div class="stat-label">GitHub Stars</div>
+                    </div>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3><a href="https://github.com/jchristn/SharpAI" target="_blank" rel="noopener">SharpAI</a></h3>
+                        </div>
+                        <p>Embed AI models locally in .NET or deploy as Ollama-compatible API servers.</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">AI/ML</span>
+                            <span class="tag">Ollama</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3><a href="https://github.com/jchristn/OllamaFlow" target="_blank" rel="noopener">OllamaFlow</a></h3>
+                        </div>
+                        <p>Load balancer for Ollama with model management across server fleets.</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">AI</span>
+                            <span class="tag">Load Balancer</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3><a href="https://github.com/jchristn/SwiftStack" target="_blank" rel="noopener">SwiftStack</a></h3>
+                        </div>
+                        <p>FastAPI-like experience for C# developers building web APIs.</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">Web API</span>
+                            <span class="tag">REST</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3><a href="https://github.com/jchristn/CrawlSharp" target="_blank" rel="noopener">CrawlSharp</a></h3>
+                        </div>
+                        <p>Web crawling library for identifying structure and retrieving endpoint contents.</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">Web Crawler</span>
+                            <span class="tag">Scraping</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3><a href="https://github.com/jchristn/Switchboard" target="_blank" rel="noopener">Switchboard</a></h3>
+                        </div>
+                        <p>Lightweight application proxy combining reverse proxy and API gateway functionality.</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">Proxy</span>
+                            <span class="tag">API Gateway</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3><a href="https://github.com/jchristn/Constellation" target="_blank" rel="noopener">Constellation</a></h3>
+                        </div>
+                        <p>Workload placement platform for exactly-one placement patterns in distributed systems.</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">Distributed</span>
+                            <span class="tag">Orchestration</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3><a href="https://github.com/dotnet/watsontcp" target="_blank" rel="noopener">WatsonTcp</a></h3>
+                            <div class="project-stats">
+                                <span>&#9733; 653</span>
+                            </div>
+                        </div>
+                        <p>The fastest, easiest way to build TCP-based clients and servers in C#. Message framing, SSL/TLS, sync/async.</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">.NET Foundation</span>
+                            <span class="tag">TCP</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3><a href="https://github.com/dotnet/watsonwebserver" target="_blank" rel="noopener">WatsonWebserver</a></h3>
+                            <div class="project-stats">
+                                <span>&#9733; 467</span>
+                            </div>
+                        </div>
+                        <p>Embeddable, fast async RESTful HTTP/HTTPS server with multiple routing options and OpenAPI support.</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">.NET Foundation</span>
+                            <span class="tag">HTTP</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3><a href="https://github.com/jchristn/WatsonWebsocket" target="_blank" rel="noopener">WatsonWebsocket</a></h3>
+                            <div class="project-stats">
+                                <span>420K+ downloads</span>
+                            </div>
+                        </div>
+                        <p>Simple, fast WebSocket server and client library for .NET applications.</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">WebSocket</span>
+                            <span class="tag">Real-time</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3><a href="https://github.com/jchristn/Less3" target="_blank" rel="noopener">Less3</a></h3>
+                        </div>
+                        <p>S3-compatible object storage server. Run your own S3-compatible storage infrastructure.</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">S3</span>
+                            <span class="tag">Object Storage</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications">
+            <div class="container">
+                <h2>Publications & Patents</h2>
+                <div class="publications-list">
+                    <div class="publication-item">
+                        <h3>Deploying Cisco Wide Area Application Services</h3>
+                        <div class="meta">Cisco Press, 2008 & 2010 (2nd Edition)</div>
+                    </div>
+                    <div class="publication-item">
+                        <h3>Application Acceleration and WAN Optimization Fundamentals</h3>
+                        <div class="meta">Cisco Press, 2007</div>
+                    </div>
+                    <div class="publication-item">
+                        <h3>Storage Networking Protocol Fundamentals</h3>
+                        <div class="meta">Cisco Press, 2006 (Editor & Contributor)</div>
+                    </div>
+                </div>
+                <div class="patents-summary">
+                    <h3>Patents</h3>
+                    <p>Dozens of patents filed and issued in data management, distributed systems, compression, serverless computing, and cloud-native architectures.</p>
+                    <p><a href="https://scholar.google.com/citations?user=Yg_E8dcAAAAJ&hl=en" target="_blank" rel="noopener">View patents and citations on Google Scholar &rarr;</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="industry">
+            <div class="container">
+                <h2>Industry Leadership</h2>
+                <div class="industry-list">
+                    <div class="industry-item">
+                        <div class="industry-date">2023 - Present</div>
+                        <div class="industry-content">
+                            <h3>.NET Foundation Member</h3>
+                            <p>Repository and package owner, author, and contributor for the .NET open source ecosystem.</p>
+                        </div>
+                    </div>
+                    <div class="industry-item">
+                        <div class="industry-date">2022 - 2024</div>
+                        <div class="industry-content">
+                            <h3>SNIA DNA Data Storage Alliance</h3>
+                            <p>Chair of Standard CODECs and Rosetta Stone working groups. Authored the first two standards on DNA data storage.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Joel Christner &middot; California &middot; <a href="mailto:joel.christner@gmail.com">joel.christner@gmail.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeToggle(newTheme);
+        }
+
+        function updateThemeToggle(theme) {
+            const sunIcon = document.querySelector('.sun-icon');
+            const moonIcon = document.querySelector('.moon-icon');
+            const label = document.querySelector('.theme-label');
+
+            if (theme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+                label.textContent = 'Dark';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+                label.textContent = 'Light';
+            }
+        }
+
+        // Initialize theme
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+            updateThemeToggle(theme);
+        })();
+    </script>
+</body>
+</html>
